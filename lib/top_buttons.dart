@@ -50,7 +50,7 @@ class CostomButtons extends StatelessWidget {
             verticalalPadding: 2,
             childWidg: TextButton(
               child: const Text(
-                'ADD',
+                'Add',
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 30,
