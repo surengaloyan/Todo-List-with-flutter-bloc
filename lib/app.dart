@@ -27,7 +27,7 @@ class _TodoListState extends State<TodoList> {
         home: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg5.jpg'),
+              image: AssetImage('assets/images/bg.jpg'),
               fit: BoxFit.cover,
             ),
           ),
