@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:todo_list/bloc/todolist_bloc.dart';
 import 'package:todo_list/list_item.dart';
 
 import '../bloc/todolist_state.dart';
 
 class Base {
-  var myBloc;
+  late TodolistBloc myBloc;
 
   set SetMyBloc(value) => myBloc = value;
 
@@ -15,21 +16,24 @@ class Base {
     return TodolistState(base: this);
   }
 
-  TodolistState removeItem(id) {
-    items.removeAt(id);
+  TodolistState removeItem(id, text) {
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].index == id) {
+        items.removeAt(i);
+        break;
+      }
+    }
     return TodolistState(base: this);
   }
 
   List<Widget> getList(list) {
     List<Widget> childs = [];
     for (var i = 0; i < list.length; i++) {
-      childs.add(ListItem(id: i + 1, itemText: list[i].text, myBloc: myBloc));
+      childs.add(ListItem(id: list[i].index, itemText: list[i].text, myBloc: myBloc, idInList: i + 1,));
       childs.add(const SizedBox(height: 10));
     }
     return childs;
   }
-
-  // Object getItem(id) => items.map((e) => id == e.index);
 }
 
 class Item {

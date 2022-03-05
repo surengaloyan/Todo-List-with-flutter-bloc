@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TodosList extends StatelessWidget {
   TodosList({Key? key, required this.myBloc}) : super(key: key);
-  var myBloc;
+  TodolistBloc myBloc;
 
   @override
   Widget build(BuildContext context) {

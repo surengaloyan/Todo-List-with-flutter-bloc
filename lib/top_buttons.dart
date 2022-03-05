@@ -1,14 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:todo_list/bloc/todolist_bloc.dart';
 import 'package:todo_list/bloc/todolist_event.dart';
+import 'package:todo_list/bloc/todolist_state.dart';
 import 'package:todo_list/glass_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CostomButtons extends StatelessWidget {
-  CostomButtons({Key? key, required this.myBloc}) : super(key: key);
+  CostomButtons({Key? key, required this.myBloc, required this.ids})
+      : super(key: key);
   TextEditingController _value = TextEditingController();
-  int id = 0;
-  var myBloc;
+  Random rand = Random();
+  List ids;
+  TodolistBloc myBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +23,24 @@ class CostomButtons extends StatelessWidget {
           opacity: 0.2,
           horizonalPadding: 10,
           verticalalPadding: 20,
-          childWidg: TextField(
-            controller: _value,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.7),
-              fontSize: 20,
-            ),
-            cursorColor: const Color.fromARGB(255, 207, 206, 206),
-            decoration: InputDecoration.collapsed(
-              hintText: 'What do you have to do?',
-              hintStyle: TextStyle(
-                color: Colors.white.withOpacity(0.5),
-              ),
-            ),
+          childWidg: BlocBuilder<TodolistBloc, TodolistState>(
+            bloc: myBloc,
+            builder: (context, state) {
+              return TextField(
+                controller: _value,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.7),
+                  fontSize: 20,
+                ),
+                cursorColor: const Color.fromARGB(255, 207, 206, 206),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'What do you have to do?',
+                  hintStyle: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                  ),
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(height: 20),
@@ -47,8 +57,15 @@ class CostomButtons extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                myBloc.add(AddListItem(text: _value.text, index: id++));
-                print(myBloc);
+                if (_value.text != '') {
+                  int id = 0 + rand.nextInt(10000); //initialize id
+                  while (ids.contains(id) == true) {
+                    id = 0 + rand.nextInt(10000); //get new id
+                  }
+                  ids.add(id);
+                  myBloc.add(AddListItem(text: _value.text, index: id));
+                  _value.text = '';
+                }
               },
             )),
       ],

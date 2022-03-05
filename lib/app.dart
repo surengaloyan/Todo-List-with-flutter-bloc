@@ -12,6 +12,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
+  List ids = [];
   var myBloc = TodolistBloc();
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,13 @@ class _TodoListState extends State<TodoList> {
           ),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Td-Do List'),
+              title: const Text(
+                'Td-Do List',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 30,
+                ),
+              ),
               backgroundColor: Colors.transparent,
               elevation: 0,
               centerTitle: true,
@@ -42,7 +49,7 @@ class _TodoListState extends State<TodoList> {
               child: Center(
                 child: Column(
                   children: [
-                    CostomButtons(myBloc: myBloc),
+                    CostomButtons(myBloc: myBloc, ids: ids),
                     const SizedBox(height: 30),
                     TodosList(myBloc: myBloc),
                   ],

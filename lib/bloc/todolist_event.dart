@@ -1,6 +1,3 @@
-// part of 'lib/bloc/todolist_bloc.dart';
-
-// @immutable
 abstract class TodolistEvent {}
 
 class AddListItem extends TodolistEvent {
@@ -11,5 +8,6 @@ class AddListItem extends TodolistEvent {
 
 class RemoveListItem extends TodolistEvent {
   int index;
-  RemoveListItem({required this.index});
+  String text;
+  RemoveListItem({required this.index, required this.text});
 }
