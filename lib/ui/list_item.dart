@@ -47,6 +47,7 @@ class ListItem extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<TodoListBloc>(context)
                   .add(RemoveTodoItem(id: id));
+              print('list item');
             },
             icon: const Icon(
               Icons.highlight_remove_rounded,

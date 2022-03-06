@@ -15,16 +15,17 @@ class TodoListBloc extends Bloc<TodoListEvents, TodoListState> {
       }
       state.ids.add(id);
       state.items.add(Item(index: id, text: event.itemText));
-      emit(state);
+      emit(TodoListState(ids: state.ids, items: state.items));
     });
     on<RemoveTodoItem>((event, emit) {
       for (var i = 0; i < state.items.length; i++) {
         if (state.items[i].index == event.id) {
           state.items.removeAt(i);
+          state.ids.remove(event.id);
           break;
         }
       }
-      emit(state);
+      emit(TodoListState(ids: state.ids, items: state.items));
     });
   }
 }
