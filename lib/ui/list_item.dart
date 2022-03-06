@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/bloc/todolist_bloc.dart';
 import 'package:todo_list/bloc/todolist_event.dart';
-import 'package:todo_list/glass_background.dart';
+import 'package:todo_list/ui/glass_background.dart';
 
 class ListItem extends StatelessWidget {
-  int idInList;
-  int id;
-  String itemText;
-  ListItem(
+  final int idInList;
+  final int id;
+  final String itemText;
+  const ListItem(
       {Key? key,
       required this.id,
       required this.idInList,
-      required this.itemText,
-      required this.myBloc})
+      required this.itemText})
       : super(key: key);
-
-  TodolistBloc myBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,8 @@ class ListItem extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              myBloc.add(RemoveListItem(index: id, text: itemText));
+              BlocProvider.of<TodoListBloc>(context)
+                  .add(RemoveTodoItem(id: id));
             },
             icon: const Icon(
               Icons.highlight_remove_rounded,

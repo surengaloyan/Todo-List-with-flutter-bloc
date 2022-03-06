@@ -1,8 +1,8 @@
-import '../data/base.dart';
+import 'package:todo_list/data/item.dart';
 
-class TodolistState {
-  late Base base;
+class TodoListState {
+  List<Item> items;
+  List<int> ids;
 
-  TodolistState({required this.base});
-  
+  TodoListState({required this.ids, required this.items});
 }

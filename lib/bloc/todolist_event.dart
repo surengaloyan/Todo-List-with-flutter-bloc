@@ -1,13 +1,12 @@
-abstract class TodolistEvent {}
+abstract class TodoListEvents {}
 
-class AddListItem extends TodolistEvent {
-  int index;
-  String text;
-  AddListItem({required this.index, required this.text});
+class AddTodoItem extends TodoListEvents {
+  String itemText;
+  AddTodoItem({required this.itemText});
 }
 
-class RemoveListItem extends TodolistEvent {
-  int index;
-  String text;
-  RemoveListItem({required this.index, required this.text});
+class RemoveTodoItem extends TodoListEvents {
+  int id;
+  RemoveTodoItem({required this.id});
 }
+

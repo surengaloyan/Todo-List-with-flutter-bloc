@@ -2,11 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class GlassBackground extends StatelessWidget {
-  Widget childWidg;
-  double horizonalPadding;
-  double verticalalPadding;
-  double opacity;
-  GlassBackground(
+  final Widget childWidg;
+  final double verticalalPadding;
+  final double horizonalPadding;
+  final double opacity;
+  const GlassBackground(
       {Key? key,
       required this.childWidg,
       required this.horizonalPadding,

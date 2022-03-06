@@ -1,19 +1,15 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:todo_list/bloc/todolist_bloc.dart';
 import 'package:todo_list/bloc/todolist_event.dart';
 import 'package:todo_list/bloc/todolist_state.dart';
-import 'package:todo_list/glass_background.dart';
+import 'package:todo_list/ui/glass_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CostomButtons extends StatelessWidget {
-  CostomButtons({Key? key, required this.myBloc, required this.ids})
+class TopButtons extends StatelessWidget {
+   TopButtons({Key? key})
       : super(key: key);
-  TextEditingController _value = TextEditingController();
-  Random rand = Random();
-  List ids;
-  TodolistBloc myBloc;
+
+  final TextEditingController _value = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +19,7 @@ class CostomButtons extends StatelessWidget {
           opacity: 0.2,
           horizonalPadding: 10,
           verticalalPadding: 20,
-          childWidg: BlocBuilder<TodolistBloc, TodolistState>(
-            bloc: myBloc,
+          childWidg: BlocBuilder<TodoListBloc, TodoListState>(
             builder: (context, state) {
               return TextField(
                 controller: _value,
@@ -58,12 +53,7 @@ class CostomButtons extends StatelessWidget {
               ),
               onPressed: () {
                 if (_value.text != '') {
-                  int id = 0 + rand.nextInt(10000); //initialize id
-                  while (ids.contains(id) == true) {
-                    id = 0 + rand.nextInt(10000); //get new id
-                  }
-                  ids.add(id);
-                  myBloc.add(AddListItem(text: _value.text, index: id));
+                  BlocProvider.of<TodoListBloc>(context).add(AddTodoItem(itemText: _value.text));
                   _value.text = '';
                 }
               },
