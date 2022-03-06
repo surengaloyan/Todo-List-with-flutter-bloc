@@ -6,8 +6,7 @@ import 'package:todo_list/ui/glass_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopButtons extends StatelessWidget {
-   TopButtons({Key? key})
-      : super(key: key);
+  TopButtons({Key? key}) : super(key: key);
 
   final TextEditingController _value = TextEditingController();
 
@@ -40,24 +39,26 @@ class TopButtons extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         GlassBackground(
-            opacity: 0.3,
-            horizonalPadding: 2,
-            verticalalPadding: 2,
-            childWidg: TextButton(
-              child: const Text(
-                'Add',
-                style: TextStyle(
-                  color: Colors.white60,
-                  fontSize: 30,
-                ),
+          opacity: 0.3,
+          horizonalPadding: 2,
+          verticalalPadding: 2,
+          childWidg: TextButton(
+            child: const Text(
+              'Add',
+              style: TextStyle(
+                color: Colors.white60,
+                fontSize: 30,
               ),
-              onPressed: () {
-                if (_value.text != '') {
-                  BlocProvider.of<TodoListBloc>(context).add(AddTodoItem(itemText: _value.text));
-                  _value.text = '';
-                }
-              },
-            )),
+            ),
+            onPressed: () {
+              if (_value.text != '') {
+                BlocProvider.of<TodoListBloc>(context)
+                    .add(AddTodoItem(itemText: _value.text));
+                _value.text = '';
+              }
+            },
+          ),
+        ),
       ],
     );
   }
